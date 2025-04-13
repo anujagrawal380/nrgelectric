@@ -1,103 +1,271 @@
+"use client";
+
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Battery,
+  Zap,
+  Clock,
+  Shield,
+} from "lucide-react";
+import Navbar from "@/components/navbar";
+import { useRef, useState } from "react";
+import { useEffect } from "react";
+import { vehicles } from "@/data/vehicles";
+import { motion } from "framer-motion";
+
+import Footer from "@/components/footer";
+import VehicleShowcase from "@/components/vehicle-showcase";
+import { ActionButton } from "@/components/ui/ActionButton";
+
+const heroImages = [
+  { src: "/vyom.png", alt: "Vyom electric scooter" },
+  { src: "/vajra-side.png", alt: "Vajra electric scooter" },
+  { src: "/nandi-pink.png", alt: "Nandi electric scooter" },
+  { src: "/gt-force.jpg", alt: "GT Force electric scooter" },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const vehicleShowcaseRef = useRef<HTMLDivElement>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollToVehicles = () => {
+    vehicleShowcaseRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  return (
+    <div className="flex min-h-screen flex-col">
+      <Navbar />
+
+      {/* Hero Section with Carousel */}
+      <section className="relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10" />
+        <div className="relative h-[85vh] w-full overflow-hidden">
+          {heroImages.map((image, index) => (
+            <div
+              key={image.src}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentImageIndex ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="container mx-auto px-6 absolute inset-0 z-20 flex flex-col justify-center">
+          <div className="max-w-2xl space-y-6 md:pl-4">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl"
+            >
+              The Future of <span className="text-orange-500">Electric</span>{" "}
+              Mobility
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-xl text-gray-200"
+            >
+              Experience the perfect blend of performance, range, and
+              sustainability with our cutting-edge electric vehicles.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 pt-2 pb-4"
+            >
+              <Button
+                size="lg"
+                onClick={scrollToVehicles}
+                className="bg-orange-500 hover:bg-orange-600 text-white"
+              >
+                Explore Vehicles
+              </Button>
+              <ActionButton
+                href="tel:+918062177621"
+                text="Book a Test Drive"
+                variant="white"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-24 px-6 bg-white">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mb-16 px-4"
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Why Choose <span className="text-orange-500">NRG Auto</span>
+            </h2>
+            <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+              Our electric vehicles are designed with innovation, performance,
+              and sustainability in mind.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="flex flex-col items-center text-center p-8 rounded-xl hover:shadow-2xl transition-shadow"
+            >
+              <div className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center mb-6">
+                <Battery className="h-8 w-8 text-orange-500" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Long Range</h3>
+              <p className="text-gray-600">
+                Up to 400 miles on a single charge, so you can go further
+                without worry.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="flex flex-col items-center text-center p-8 rounded-xl hover:shadow-2xl transition-shadow"
+            >
+              <div className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center mb-6">
+                <Zap className="h-8 w-8 text-orange-500" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Fast Charging</h3>
+              <p className="text-gray-600">
+                Charge up to 80% in just 30 minutes with our supercharging
+                network.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="flex flex-col items-center text-center p-8 rounded-xl hover:shadow-2xl transition-shadow"
+            >
+              <div className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center mb-6">
+                <Clock className="h-8 w-8 text-orange-500" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Performance</h3>
+              <p className="text-gray-600">
+                0-60 mph in as little as 3.1 seconds with instant torque
+                delivery.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="flex flex-col items-center text-center p-8 rounded-xl hover:shadow-2xl transition-shadow"
+            >
+              <div className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center mb-6">
+                <Shield className="h-8 w-8 text-orange-500" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Safety</h3>
+              <p className="text-gray-600">
+                Advanced driver assistance systems and top safety ratings for
+                peace of mind.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vehicle Showcase */}
+      <section ref={vehicleShowcaseRef} className="py-24 px-6 bg-gray-50">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mb-16 px-4"
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Our <span className="text-orange-500">Vehicles</span>
+            </h2>
+            <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+              Explore our lineup of premium electric vehicles designed for every
+              lifestyle.
+            </p>
+          </motion.div>
+
+          <VehicleShowcase vehicles={vehicles} />
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 px-6 bg-orange-500 text-white">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col lg:flex-row items-center justify-between px-4"
+          >
+            <div className="mb-10 lg:mb-0 lg:max-w-2xl">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Ready to join the electric revolution?
+              </h2>
+              <p className="mt-6 text-xl text-orange-100">
+                Schedule a test drive today and experience the future of
+                driving.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <ActionButton
+                href="tel:+918062177621"
+                text="Book Test Drive"
+                variant="white"
+                showArrow={false}
+              />
+              <ActionButton
+                href="tel:+918062177621"
+                text="Contact Sales"
+                variant="white"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
