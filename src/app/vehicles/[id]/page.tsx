@@ -20,15 +20,12 @@ import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
 import * as React from "react";
 import { motion } from "framer-motion";
+import { useParams } from "next/navigation";
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
-export default function VehicleDetailPage({ params }: PageProps) {
-  const id = params.id;
+export default function VehicleDetailPage() {
+  // Use the hook to get params directly
+  const params = useParams();
+  const id = params.id as string;
   const vehicle = getVehicleById(id);
 
   if (!vehicle) {

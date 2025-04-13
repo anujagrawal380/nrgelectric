@@ -95,7 +95,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 pt-2 pb-4"
+              className="flex flex-col space-y-4 gap-4 sm:space-y-0 sm:space-x-4 pt-2 pb-4"
             >
               <Button
                 size="lg"
