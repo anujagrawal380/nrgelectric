@@ -21,13 +21,15 @@ import { useState, useEffect } from "react";
 import * as React from "react";
 import { motion } from "framer-motion";
 
-export default function VehicleDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const unwrappedParams: any = React.use(params as any);
-  const vehicle = getVehicleById(unwrappedParams.id);
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
+export default function VehicleDetailPage({ params }: PageProps) {
+  const id = params.id;
+  const vehicle = getVehicleById(id);
 
   if (!vehicle) {
     notFound();
@@ -276,7 +278,7 @@ export default function VehicleDetailPage({
                   <Button
                     size="lg"
                     className="bg-orange-500 hover:text-orange-500 hover:bg-white border border-orange-500 text-white rounded-full cursor-pointer px-8 py-6 shadow-md"
-                    onClick={() => window.location.href = 'tel:+918062177621'}
+                    onClick={() => (window.location.href = "tel:+918062177621")}
                   >
                     Schedule Test Drive
                   </Button>
@@ -284,7 +286,7 @@ export default function VehicleDetailPage({
                     size="lg"
                     variant="outline"
                     className="border-orange-500 text-orange-500 hover:bg-orange-50 rounded-full px-8 py-6"
-                    onClick={() => window.location.href = 'tel:+918062177621'}
+                    onClick={() => (window.location.href = "tel:+918062177621")}
                   >
                     Contact Sales
                   </Button>
