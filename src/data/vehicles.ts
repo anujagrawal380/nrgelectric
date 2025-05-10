@@ -209,7 +209,7 @@ export const vehicles: Vehicle[] = [
     id: "dl3",
     name: "DL3",
     category: "Fast Scooter",
-    imageSrc: "/DL3.png",
+    imageSrc: "/dl3.png",
     description:
       "The DL3 is a fast scooter that is designed for urban mobility. It is a great choice for those who want to travel in a fast and efficient way.",
     features: [

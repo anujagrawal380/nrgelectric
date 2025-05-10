@@ -2,12 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {
-  Battery,
-  Zap,
-  Clock,
-  Shield,
-} from "lucide-react";
+import { Battery, Zap, Clock, Shield } from "lucide-react";
 import Navbar from "@/components/navbar";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
@@ -19,10 +14,23 @@ import VehicleShowcase from "@/components/vehicle-showcase";
 import { ActionButton } from "@/components/ui/ActionButton";
 
 const heroImages = [
+  { src: "/nrg-main.jpg", alt: "NRG Auto electric scooter" },
+  { src: "/nrg-1.jpg", alt: "NRG Auto electric scooter" },
   { src: "/vyom.png", alt: "Vyom electric scooter" },
+  { src: "/nrg-2.jpg", alt: "NRG Auto electric scooter" },
   { src: "/vajra-side.png", alt: "Vajra electric scooter" },
+  { src: "/nrg-13.jpg", alt: "NRG Auto electric scooter" },
+  { src: "/nrg-3.jpg", alt: "NRG Auto electric scooter" },
   { src: "/nandi-pink.png", alt: "Nandi electric scooter" },
+  { src: "/nrg-4.jpg", alt: "NRG Auto electric scooter" },
   { src: "/gt-force.jpg", alt: "GT Force electric scooter" },
+  { src: "/nrg-5.jpg", alt: "NRG Auto electric scooter" },
+  { src: "/nrg-6.jpg", alt: "NRG Auto electric scooter" },
+  { src: "/nrg-7.jpg", alt: "NRG Auto electric scooter" },
+  { src: "/nrg-8.jpg", alt: "NRG Auto electric scooter" },
+  { src: "/nrg-10.jpg", alt: "NRG Auto electric scooter" },
+  { src: "/nrg-11.jpg", alt: "NRG Auto electric scooter" },
+  
 ];
 
 export default function Home() {
@@ -236,9 +244,9 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="flex flex-col lg:flex-row items-center justify-between px-4"
+            className="flex flex-col lg:flex-row items-center justify-between gap-10"
           >
-            <div className="mb-10 lg:mb-0 lg:max-w-2xl">
+            <div className="lg:max-w-xl">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Ready to join the electric revolution?
               </h2>
@@ -246,25 +254,38 @@ export default function Home() {
                 Schedule a test drive today and experience the future of
                 driving.
               </p>
+              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                <Button
+                  size="lg"
+                  className="bg-white hover:bg-orange-50 text-orange-500 rounded-lg cursor-pointer px-8 py-6 shadow-md hover:scale-[1.02] transition-all duration-300"
+                  onClick={() => (window.location.href = "tel:+918062177621")}
+                >
+                  Book Test Drive →
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-white hover:bg-orange-50 text-orange-500 rounded-lg cursor-pointer px-8 py-6 shadow-md hover:scale-[1.02] transition-all duration-300"
+                  onClick={() => (window.location.href = "tel:+918062177621")}
+                >
+                  Contact Sales →
+                </Button>
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <ActionButton
-                href="tel:+918062177621"
-                text="Book Test Drive"
-                variant="white"
-                showArrow={false}
-              />
-              <ActionButton
-                href="tel:+918062177621"
-                text="Contact Sales"
-                variant="white"
-              />
+            <div className="w-full lg:w-1/2 h-[400px] rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3752.057348944752!2d75.88246101531556!3d19.850013133189334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bda57640103dc13%3A0x23d007c98a03a10!2sNRG%20auto%20electric%20industry!5e0!3m2!1sen!2sin!4v1720065921388!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

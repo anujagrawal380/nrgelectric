@@ -8,6 +8,7 @@ import {
   SheetContent,
   SheetTitle,
   SheetTrigger,
+  SheetDescription,
 } from "@/components/ui/sheet";
 import { Menu, X, Zap } from "lucide-react";
 import Image from "next/image";
@@ -65,8 +66,11 @@ export default function Navbar() {
             className="bg-black text-white w-[300px] sm:w-[350px] p-6"
           >
             <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+            <SheetDescription className="sr-only">
+              Mobile navigation menu for NRG Auto
+            </SheetDescription>
             <div className="flex flex-col h-full">
-              <div className="flex items-center justify-between mb-10 pt-4">
+              <div className="flex items-center mb-10 pt-4">
                 <Link
                   href="/"
                   className="flex items-center space-x-3"
@@ -79,15 +83,6 @@ export default function Navbar() {
                     height={60}
                   />
                 </Link>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="p-3"
-                >
-                  <X className="h-6 w-6" />
-                  <span className="sr-only">Close menu</span>
-                </Button>
               </div>
               <nav className="flex flex-col space-y-8 px-2">
                 <Link

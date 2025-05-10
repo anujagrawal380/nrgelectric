@@ -219,12 +219,12 @@ export default function AboutPage() {
               className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all"
             >
               <div className="relative h-64">
-                {/* <Image
-                  src="/ravindra.jpg"
+                <Image
+                  src="/nrg-main.jpg"
                   alt="Team Member"
                   fill
                   className="object-cover"
-                /> */}
+                /> 
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900">Ravindra Gaikwad</h3>

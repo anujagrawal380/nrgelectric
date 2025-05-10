@@ -90,7 +90,7 @@ export default function FaqPage() {
             priority
           />
         </div>
-        <div className="container relative z-10 mx-auto px-6 h-full flex flex-col justify-center">
+        <div className="container relative z-10 mt-10 mx-auto px-10 h-full flex flex-col justify-center">
           <h1 className="text-5xl font-bold text-white sm:text-6xl tracking-tight">
             Frequently Asked <span className="text-orange-500">Questions</span>
           </h1>
